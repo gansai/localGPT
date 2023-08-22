@@ -48,9 +48,13 @@ def load_model(device_type, model_id, model_basename=None):
             # Remove the ".safetensors" ending if present
             model_basename = model_basename.replace('.safetensors', '')
 
+        tokenizer = AutoTokenizer.from_pretrained(model_id, use_fast=True)
+        # download quantized model from Hugging Face Hub and load to the first GPU
         model = AutoGPTQForCausalLM.from_quantized(model_id,
-                model_basename=model_basename, device='cuda',
-                use_safetensors=True, use_triton=False)
+        model_basename=model_basename,
+        device=device,
+        use_safetensors=True,
+        use_triton=False)
 
     # Create a pipeline for text generation
 
