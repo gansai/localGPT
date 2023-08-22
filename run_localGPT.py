@@ -43,19 +43,10 @@ def load_model(device_type, model_id, model_basename=None):
     # logging.info('This action can take a few minutes!')
 
     if model_basename is not None:
-
         # The code supports all huggingface models that ends with GPTQ and have some variation of .no-act.order or .safetensors in their HF repo.
-
-        print 'Using AutoGPTQForCausalLM for quantized models'
         if '.safetensors' in model_basename:
-
             # Remove the ".safetensors" ending if present
-
             model_basename = model_basename.replace('.safetensors', '')
-
-        tokenizer = AutoTokenizer.from_pretrained(model_id,
-                use_fast=True)
-        logging.info('Tokenizer loaded')
 
         model = AutoGPTQForCausalLM.from_quantized(model_id,
                 model_basename=model_basename, device='cuda',
