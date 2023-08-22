@@ -48,6 +48,9 @@ def load_model(device_type, model_id, model_basename=None):
         tokenizer = AutoTokenizer.from_pretrained(model_id, use_fast=True)
         logging.info('Tokenizer loaded')
 
+        model_id = "TheBloke/WizardLM-7B-uncensored-GPTQ"
+        model_basename = ""WizardLM-7B-uncensored-GPTQ-4bit-128g.compat.no-act-order"
+        
         model = AutoGPTQForCausalLM.from_quantized(
             model_id,
             model_basename=model_basename,
