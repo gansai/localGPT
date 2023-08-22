@@ -52,7 +52,7 @@ def load_model(device_type, model_id, model_basename=None):
         # download quantized model from Hugging Face Hub and load to the first GPU
         model = AutoGPTQForCausalLM.from_quantized(model_id,
         model_basename=model_basename,
-        device=device,
+        device=device_type,
         use_safetensors=True,
         use_triton=False)
 
